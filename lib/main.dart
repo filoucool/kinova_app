@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'cart.dart';
 import 'object.dart';
@@ -31,9 +35,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Dish> _dishes = List<Dish>();
+  List<items> itemlist = List<items>();
 
-  List<Dish> _cartList = List<Dish>();
+  List<items> _cartList = List<items>();
 
   @override
   void initState() {
@@ -94,9 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ListView _buildListView() {
     return ListView.builder(
-      itemCount: _dishes.length,
+      itemCount: itemlist.length,
       itemBuilder: (context, index) {
-        var item = _dishes[index];
+        var item = itemlist[index];
         return Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 8.0,
@@ -141,9 +145,9 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.all(4.0),
         gridDelegate:
         SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: _dishes.length,
+        itemCount: itemlist.length,
         itemBuilder: (context, index) {
-          var item = _dishes[index];
+          var item = itemlist[index];
           return Card(
               elevation: 4.0,
               child: Stack(
@@ -201,33 +205,33 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _populateItems() {
-    var list = <Dish>[
-      Dish(
+    var list = <items>[
+      items(
         name: 'Bloc Noir',
         icon: Icons.album_rounded,
         color: Colors.black,
       ),
-      Dish(
+      items(
         name: 'Bloc Rouge',
         icon: Icons.album_rounded,
         color: Colors.red[900],
       ),
-      Dish(
+      items(
         name: 'Bloc Bleu',
         icon: Icons.album_rounded,
         color: Colors.blue[900]
       ),
-      Dish(
+      items(
         name: 'Bloc Vert',
         icon: Icons.album_rounded,
         color: Colors.green[900],
       ),
-      Dish(
+      items(
         name: 'Ressort',
         icon: Icons.zoom_out_map,
         color: Colors.grey[800],
       ),
-      Dish(
+      items(
         name: 'Couvercle',
         icon: Icons.album_outlined,
         color: Colors.grey[800],
@@ -235,7 +239,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     setState(() {
-      _dishes = list;
+      itemlist = list;
     });
   }
 }
